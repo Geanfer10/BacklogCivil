@@ -454,11 +454,11 @@ function selectChip(container, chipEl, current, value) {
 
 async function init() {
   try {
-    const res = await fetch("data.json", { cache: "no-store" });
+    const res = await fetch("/api/data", { cache: "no-store" });
     allData = await res.json();
   } catch (e) {
     document.getElementById("main-content").innerHTML =
-      '<div class="empty-state">Não foi possível carregar data.json. Verifique se o GitHub Action já rodou pelo menos uma vez.</div>';
+      '<div class="empty-state">Não foi possível carregar os dados. Verifique se o token do Monday está configurado no Vercel (MONDAY_API_TOKEN).</div>';
     return;
   }
 
