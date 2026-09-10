@@ -1,0 +1,9 @@
+{
+  "generated_at": null,
+  "groups": [
+    { "id": "topics", "title": "🔴 Urgente / Alta Prioridade", "items": [] },
+    { "id": "group_mm72zwqs", "title": "🟡 Em Andamento", "items": [] },
+    { "id": "group_mm72f941", "title": "⚪ Backlog (Não Iniciado)", "items": [] },
+    { "id": "group_mm72xfpz", "title": "🟢 Concluído", "items": [] }
+  ]
+}
