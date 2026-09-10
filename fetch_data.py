@@ -20,6 +20,7 @@ COLUMN_IDS = {
     "status": "color_mm72t2m8",
     "prioridade": "color_mm729h5r",
     "solicitante": "text_mm722d2b",
+    "fotos": "file_mm72pz7r",
 }
 
 GROUP_ORDER = ["topics", "group_mm72zwqs", "group_mm72f941", "group_mm72xfpz"]
@@ -45,6 +46,10 @@ query ($boardId: [ID!]) {
         ]) {
           id
           text
+        }
+        assets {
+          id
+          public_url
         }
       }
     }
@@ -87,6 +92,7 @@ def main():
     for item in board["items_page"]["items"]:
         col_map = {cv["id"]: (cv["text"] or "") for cv in item["column_values"]}
         group_id = item["group"]["id"]
+        fotos = [a["public_url"] for a in item.get("assets", []) if a.get("public_url")]
         record = {
             "id": item["id"],
             "atividade": item["name"],
@@ -96,6 +102,7 @@ def main():
             "status": col_map.get(COLUMN_IDS["status"], ""),
             "prioridade": col_map.get(COLUMN_IDS["prioridade"], ""),
             "solicitante": col_map.get(COLUMN_IDS["solicitante"], ""),
+            "fotos": fotos,
         }
         items_by_group.setdefault(group_id, []).append(record)
 

@@ -33,4 +33,11 @@ repositórios gratuitos.
 ## Estrutura de dados (data.json)
 
 Cada item traz: atividade (nome), data de solicitação, data de execução,
-ordem de serviço, status, prioridade e solicitante (texto livre).
+ordem de serviço, status, prioridade, solicitante (texto livre) e fotos
+(lista de URLs).
+
+**Sobre as fotos**: as URLs vêm do campo `public_url` da API do Monday,
+que expira em cerca de 1 hora. Como o workflow roda a cada 5 minutos e o
+painel sempre carrega o `data.json` mais recente (sem cache), as fotos
+continuam funcionando normalmente — só não abra o painel isolado sem
+internet ou com o `data.json` muito desatualizado.

@@ -184,6 +184,26 @@
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .card .thumb {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    display: block;
+    background: #1d222e;
+  }
+
+  .card .thumb.placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .card .card-body {
     padding: 16px;
   }
 
@@ -382,20 +402,28 @@ function render() {
 
       const statusColor = STATUS_COLORS[item.status] || "var(--muted)";
       const prioColor = PRIORIDADE_COLORS[item.prioridade] || "var(--muted)";
+      const foto = (item.fotos && item.fotos.length > 0) ? item.fotos[0] : null;
+
+      const thumbHtml = foto
+        ? `<img class="thumb" src="${foto}" alt="Foto da atividade" loading="lazy">`
+        : `<div class="thumb placeholder">sem foto</div>`;
 
       card.innerHTML = `
-        <div class="atividade">${item.atividade}</div>
-        <div class="tags">
-          ${item.status ? `<span class="tag" style="background:${statusColor}">${item.status}</span>` : ""}
-          ${item.prioridade ? `<span class="tag" style="background:${prioColor}">${item.prioridade}</span>` : ""}
-          ${item.ordem_servico ? `<span class="tag plain">OS: ${item.ordem_servico}</span>` : ""}
-        </div>
-        <div class="card-footer">
-          <div>
-            <div>${item.solicitante ? item.solicitante : "sem solicitante"}</div>
-            <div class="os">Solicitado: ${fmtDate(item.data_solicitacao)}</div>
+        ${thumbHtml}
+        <div class="card-body">
+          <div class="atividade">${item.atividade}</div>
+          <div class="tags">
+            ${item.status ? `<span class="tag" style="background:${statusColor}">${item.status}</span>` : ""}
+            ${item.prioridade ? `<span class="tag" style="background:${prioColor}">${item.prioridade}</span>` : ""}
+            ${item.ordem_servico ? `<span class="tag plain">OS: ${item.ordem_servico}</span>` : ""}
           </div>
-          <div>${fmtDate(item.data_execucao)}</div>
+          <div class="card-footer">
+            <div>
+              <div>${item.solicitante ? item.solicitante : "sem solicitante"}</div>
+              <div class="os">Solicitado: ${fmtDate(item.data_solicitacao)}</div>
+            </div>
+            <div>${fmtDate(item.data_execucao)}</div>
+          </div>
         </div>
       `;
       cardsWrap.appendChild(card);
