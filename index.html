@@ -406,7 +406,7 @@ function render() {
 
       let thumbHtml;
       if (foto && foto.tipo === "video") {
-        thumbHtml = `<video class="thumb" src="${foto.url}" controls preload="metadata"></video>`;
+        thumbHtml = `<video class="thumb" src="${foto.url}" controls autoplay muted loop playsinline preload="auto"></video>`;
       } else if (foto) {
         thumbHtml = `<img class="thumb" src="${foto.url}" alt="Foto da atividade" loading="lazy">`;
       } else {
